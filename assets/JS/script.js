@@ -1,6 +1,6 @@
 // API Keys
 // No API Key required for OpenBrewery
-const geoCodeAPIKey = "226313345002317562966x67994";
+let geoCodeAPIKey = "226313345002317562966x67994";
 let geoQueryUrl = `https://geocode.xyz/${userStreetEl.value},+${userZipEl.value}+${userCityEl.value}?json=1&auth=${geoCodeAPIKey}`;
 
   
