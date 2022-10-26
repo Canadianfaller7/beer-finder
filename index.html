@@ -4,9 +4,127 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Beer Finder</title>
 </head>
 <body>
-    
+    <div class="tile is-ancestor">
+        <div class="tile is-4 is-vertical is-parent">
+            <div class="tile is-child box">
+                <p class="title">Logo</p>
+
+            </div>
+            <div class="tile is-child box">
+                <p class="title">Find Me A Beer!</p>
+
+                // Form elements can be added/changed according to API requirements and abilities
+                <div class="control">
+                    <input class="input" type="text" placeholder="Street" id="user-street">
+                    <input class="input" type="text" placeholder="Zip code" id="user-zip-code">
+                    <input class="input" type="text" placeholder="City" id="user-city">
+                </div>
+                <div class="control">
+                    <div class="select">
+                        <select id="states">
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control">
+                    <button class="location-submit is-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-parent">
+            <div class="tile is-child box">
+                <p class="title">Search Results</p>
+            
+                // This is our fake accordion, for structure example only
+                // To be built and populated dynamically later
+                <div class="accordion">
+                    <div class="brewpubs brewpub-1"> // in a loop: "brewpub-" + i;
+                        <h4>Name of the Brew Pub</h4>
+                        <div class="brewpub-info">
+                            Info about the location
+                        </div>
+                        <div class="linkToMap">
+                            <button class="maplink">See Map</button>
+                        </div>
+                    </div>
+                    <div class="brewpubs brewpub-2">
+                        <h4>Name of the Brew Pub</h4>
+                        <div class="brewpub-info">
+                            Info about the location
+                        </div>
+                        <div class="linkToMap">
+                            <button class="maplink">See Map</button>
+                        </div>
+                    </div>
+                    <div class="brewpubs brewpub-3">
+                        <h4>Name of the Brew Pub</h4>
+                        <div class="brewpub-info">
+                            Info about the location
+                        </div>
+                        <div class="linkToMap">
+                            <button class="maplink">See Map</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="assets/JS/script.js"></script>
 </body>
 </html>
