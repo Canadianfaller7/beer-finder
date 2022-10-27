@@ -40,7 +40,7 @@ function getLatAndLong() {
             console.log(lat);
             console.log(lon);
             
-              function findBrewery () {
+            function findBrewery () {
               var openBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${lat},${lon}`;
         
               fetch(openBreweryUrl)
