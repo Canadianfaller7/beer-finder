@@ -33,17 +33,36 @@ function getLatAndLong() {
           //alert("Location not found");
         //}else{
             //getBrewPubs()
-            var lat = data.standard.latt ;
-            var lon = data.standard.longt;
+            var lat = data.latt ;
+            var lon = data.longt;
             console.log(data);
             console.log(inputStreet);
             console.log(lat);
             console.log(lon);
+            
+              function findBrewery () {
+              var openBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${lat},${lon}`;
+        
+              fetch(openBreweryUrl)
+              .then(function (response) {
+                if (!response.ok) throw new Error(response.statusText);
+                return response.json();
+              })
+                .then(function (data) {
+                  console.log(data);
+                })
+        
+                
+            }
+            findBrewery();
+          
+     
         });
 
-    
- 
     };
+
+
+  
 //}
 // return [lat, lon]; 
 ;
