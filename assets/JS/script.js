@@ -1,6 +1,6 @@
 // API Keys
 // No API Key required for OpenBrewery
-let geoCodeAPIKey = "887595172218881676268x71325";
+const geoCodeAPIKey = "887595172218881676268x71325";
 
 /* this function is getting the users address and then passing it into
 the geo api call*/
