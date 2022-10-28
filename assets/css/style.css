@@ -1,5 +1,5 @@
 :root {
-    --highlight-color: #846f66;
+    --highlight-color: #9e8e87;
 }
 
 html {
@@ -49,6 +49,10 @@ main .form-container select {
     width: 100%;
 }
 
+main .form-container p {
+    color:#fff;
+}
+
 main .form-container .submit-btn {
     text-align: right;
 }
@@ -71,7 +75,7 @@ main .form-container button.location-submit:hover {
 
 main .brewery-list h4 {
     background-color: #000;
-    border: 1px solid #846f66;
+    border: 1px solid var(--highlight-color);
     color: #fff;
     margin-top: 8px;
     padding:15px 35px; 
@@ -94,8 +98,16 @@ main .brewery-list .location-info {
     background-color: rgba(0,0,0,0.8);
     padding: 15px 35px;
     color: var(--highlight-color);
-    font-size: 1rem;
+    font-size: 1.15rem;
     display: none;
+}
+
+.hide { 
+    display: none;
+}
+
+.show {
+    display: block;
 }
 
 @media(min-width:768px) {
