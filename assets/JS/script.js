@@ -1,5 +1,6 @@
 // API Keys
 // No API Key required for OpenBrewery
+
 const geoCodeAPIKey = "887595172218881676268x71325";
 
 /* this function is getting the users address and then passing it into
@@ -10,7 +11,6 @@ const getLatAndLong = async () => {
   let inputCity = $("#user-city").val();
 
   const geoQueryUrl = `https://geocode.xyz/${inputStreet},+${inputZip}+${inputCity}?json=1&auth=${geoCodeAPIKey}`;
-  console.log(geoQueryUrl);
 
   // wait for result and make sure response is good, parse it
   await fetch(geoQueryUrl)
@@ -21,12 +21,16 @@ const getLatAndLong = async () => {
     let lat = data.latt ;
     let lon = data.longt;
     $('.accordion').removeClass('hide')
+    
     findBrewery(lat,lon)
     savedLatLon(lat, lon)
+    
     return lat, lon;
   })
 }
 
+/* This function takes the lat and lon from the geop api and passes it into the openBrewery api to get the 
+closest pubs near the location user entered */
 const findBrewery = async (lat,lon) => {
   const openBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${lat},${lon}&per_page=6`;
 
@@ -37,13 +41,15 @@ const findBrewery = async (lat,lon) => {
   })
   .then(data => {
     console.log(data);
+    // setting var for 6 pub locations
     let pubOne = data[0];
     let pubTwo = data[1];
     let pubThree = data[2];
     let pubFour = data[3];
     let pubFive = data[4];
     let pubSix = data[5];
-
+    
+    // displaying names of pub for user
     $(".brewpub-1 h4").text(pubOne.name);
     $(".brewpub-2 h4").text(pubTwo.name);
     $(".brewpub-3 h4").text(pubThree.name);
@@ -51,6 +57,7 @@ const findBrewery = async (lat,lon) => {
     $(".brewpub-5 h4").text(pubFive.name);
     $(".brewpub-6 h4").text(pubSix.name);
 
+    // giving user the address and website of the pub
     const pubOneInfo = 
                       `
                       <p>${pubOne.street}, ${pubOne.city}, ${pubOne.postal_code}</p>
@@ -96,7 +103,7 @@ const findBrewery = async (lat,lon) => {
   }) 
 }
 
-
+// checking if lat and lon is in the localStorage
 const savedLatLon = (lat, lon) => {
     let history = getSearchHistory();
     let newHist = [];
@@ -106,10 +113,8 @@ const savedLatLon = (lat, lon) => {
             return item !== lat, lon
         })
     }
-    // adding new city to the front of the array
+    // adding new lat and lon to the front of the array
     newHist.unshift(lat, lon);
-    // if the new history gets bigger than 10 remove the last search stored
-    if(newHist.length > 6) newHist.pop();
 
     localStorage.setItem('history', JSON.stringify(newHist));
 }
