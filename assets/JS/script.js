@@ -1,49 +1,41 @@
 // API Keys
 // No API Key required for OpenBrewery
-const geoCodeAPIKey = "887595172218881676268x71325";
+let geoCodeAPIKey = "887595172218881676268x71325";
 
-function getLatAndLong() {
-  let inputStreet = $("#user-street").text();
-  let inputZip = $("#user-zip-code").text();
-  let inputCity = $("#user-city").text();
+/* this function is getting the users address and then passing it into
+the geo api call*/
+const getLatAndLong = async () => {
+  let inputStreet = $("#user-street").val();
+  let inputZip = $("#user-zip-code").val();
+  let inputCity = $("#user-city").val();
 
   const geoQueryUrl = `https://geocode.xyz/${inputStreet},+${inputZip}+${inputCity}?json=1&auth=${geoCodeAPIKey}`;
+  console.log(geoQueryUrl);
 
-  fetch(geoQueryUrl)
-  .then(function (response) {
-    return response.json();
-  })
-    
-  .then(function (data) {
+  // wait for result and make sure response is good, parse it
+  await fetch(geoQueryUrl)
+  .then(response => response.json())
+  .then(data => {
+    $('.accordion').addClass('hide')
+    // getting lat and lon from api data to pass into brewery api
     let lat = data.latt ;
     let lon = data.longt;
-    console.log(`lat => ${lat} || lon ${lon}`);
     $('.accordion').removeClass('hide')
-    findBrewery(lat,lon);
-    return lat,lon;
-  });
+    findBrewery(lat,lon)
+    savedLatLon(lat, lon)
+    return lat, lon;
+  })
 }
-/*function saveLatLon(lat, lon) {
-  getLatAndLong();
-  console.log(`lat => ${lat}`);
-  localStorage.setItem('savedLat', JSON.stringify(lat));
-  localStorage.setItem('savedLon',JSON.stringify(lon)); 
-}
-function getLocalLantLon() {
-  var localLat = JSON.parse(localStorage.getItem("savedLat"));
-  var localLon =  JSON.parse(localStorage.getItem("savedLat")); 
 
-}*/
-
-function findBrewery (lat,lon) {
+const findBrewery = async (lat,lon) => {
   const openBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${lat},${lon}&per_page=6`;
 
-  fetch(openBreweryUrl)
-  .then(function (response) {
+  await fetch(openBreweryUrl)
+  .then(response => {
     if (!response.ok) throw new Error(response.statusText);
     return response.json();
   })
-  .then(function (data) {
+  .then(data => {
     console.log(data);
     let pubOne = data[0];
     let pubTwo = data[1];
@@ -86,25 +78,68 @@ function findBrewery (lat,lon) {
                       <p>${pubFour.street}, ${pubFour.city}, ${pubFour.postal_code}</p>
                       <p>${pubFour.website_url}</p>
                       `;
-    $('#location-info-3').append(pubFourInfo);
+    $('#location-info-4').append(pubFourInfo);
 
     const pubFiveInfo = 
                       `
                       <p>${pubFive.street}, ${pubFive.city}, ${pubFive.postal_code}</p>
                       <p>${pubFive.website_url}</p>
                       `;
-    $('#location-info-3').append(pubFiveInfo);
+    $('#location-info-5').append(pubFiveInfo);
 
     const pubSixInfo = 
                       `
                       <p>${pubSix.street}, ${pubSix.city}, ${pubSix.postal_code}</p>
                       <p>${pubSix.website_url}</p>
                       `;
-    $('#location-info-3').append(pubSixInfo);
+    $('#location-info-6').append(pubSixInfo);
   }) 
 }
 
+
+const savedLatLon = (lat, lon) => {
+    let history = getSearchHistory();
+    let newHist = [];
+
+    if(history){
+        newHist = history.filter(item =>{
+            return item !== lat, lon
+        })
+    }
+    // adding new city to the front of the array
+    newHist.unshift(lat, lon);
+    // if the new history gets bigger than 10 remove the last search stored
+    if(newHist.length > 6) newHist.pop();
+
+    localStorage.setItem('history', JSON.stringify(newHist));
+}
+
+// getting the history or array from local storage and returning it
+const getSearchHistory = () => {
+    const history = JSON.parse(localStorage.getItem('history')) || [];
+    return history;
+}
+
+// function saveLatLon(lat, lon) {
+//   getLatAndLong();
+//   console.log(`lat => ${lat}`);
+//   localStorage.setItem('savedLat', JSON.stringify(lat));
+//   localStorage.setItem('savedLon',JSON.stringify(lon)); 
+// }
+// function getLocalLantLon() {
+//   var localLat = JSON.parse(localStorage.getItem("savedLat"));
+//   var localLon =  JSON.parse(localStorage.getItem("savedLat")); 
+
+// }
+
 // event listener on .submit-button
 $("#address-submit").on("click", (e) => {
-        getLatAndLong()
+  getLatAndLong()
+  // resetting user values for new input
+  $("#user-house").val('');
+  $("#user-street").val('');
+  $("#user-zip-code").val('');
+  $("#user-city").val('');
+  $('#states').val('AL');
+  $('.location-info').html('');
 });
