@@ -103,7 +103,6 @@ const findBrewery = async (lat,lon) => {
   }) 
 }
 
-// checking if lat and lon is in the localStorage
 const savedLatLon = (lat, lon) => {
     let history = getSearchHistory();
     let newHist = [];
@@ -115,27 +114,49 @@ const savedLatLon = (lat, lon) => {
     }
     // adding new lat and lon to the front of the array
     newHist.unshift(lat, lon);
-
     localStorage.setItem('history', JSON.stringify(newHist));
+    
+
 }
+
 
 // getting the history or array from local storage and returning it
 const getSearchHistory = () => {
     const history = JSON.parse(localStorage.getItem('history')) || [];
-    return history;
+    console.log(history);
+    //running the localStorage latn and long to receive associated pubs in order to populate page with search history.
+    if (localStorage.getItem('history') != null) {
+    const historyLat = history[0];
+    const historyLong = history[1];
+    const historyBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${historyLat},${historyLong}&per_page=4`;
+   fetch(historyBreweryUrl)
+  .then(response => {
+    if (!response.ok) throw new Error(response.statusText);
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+    let historyPubOne = data[0];
+    let historyPubTwo = data[1];
+    let historyPubThree = data[2];
+    let historyPubFour = data[3];
+    console.log(historyPubOne);
+    $("#search-history1").text(historyPubOne.name);
+    $( "#search-history2").text(historyPubTwo.name);
+    $("#search-history3").text(historyPubThree.name);
+    $("#search-history4").text(historyPubFour.name);   
+    
+})
+    }
+    
+    //return history;
+
 }
-
-// function saveLatLon(lat, lon) {
-//   getLatAndLong();
-//   console.log(`lat => ${lat}`);
-//   localStorage.setItem('savedLat', JSON.stringify(lat));
-//   localStorage.setItem('savedLon',JSON.stringify(lon)); 
-// }
-// function getLocalLantLon() {
-//   var localLat = JSON.parse(localStorage.getItem("savedLat"));
-//   var localLon =  JSON.parse(localStorage.getItem("savedLat")); 
-
-// }
+ /*$('#history-dropdown').change(function() {
+    var val = $("#history-dropdown option:selected").text();
+    if ()
+    findBrewery(val);
+});*/
 
 // event listener on .submit-button
 $("#address-submit").on("click", (e) => {
@@ -147,4 +168,6 @@ $("#address-submit").on("click", (e) => {
   $("#user-city").val('');
   $('#states').val('AL');
   $('.location-info').html('');
+
+  
 });
