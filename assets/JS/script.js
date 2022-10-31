@@ -3,6 +3,8 @@
 
 const geoCodeAPIKey = "887595172218881676268x71325";
 
+var errorModal = $("#errorModal");
+
 /* this function is getting the users address and then passing it into
 the geo api call*/
 const getLatAndLong = async () => {
@@ -20,6 +22,22 @@ const getLatAndLong = async () => {
     // getting lat and lon from api data to pass into brewery api
     let lat = data.latt ;
     let lon = data.longt;
+    
+    if (lat === "0.00000", lon === "0.00000") {
+      errorModal.show();
+      $(".close").on("click", (e) => {
+        errorModal.hide();
+      });
+      
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == errorModal) {
+          errorModal.hide();
+        }
+      }
+      return;
+    };
+
     $('.accordion').removeClass('hide')
     
     findBrewery(lat,lon)
