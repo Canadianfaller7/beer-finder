@@ -5,14 +5,13 @@
 
 - As we went through this project the biggest impact was learning how to work as a group, using Git and how to set up a project. We were tasked to work with multiple restAPI's and know to use their information to integrate with eachother in order to get results for the nearest breweries, and to save the returned information into local storage. The layout was built using the Bulma css framework with our project, a CSS framework other than bootstrap.
 
-
 ## Installation
 N/A
 
 ## Usage
-- Input the city you would like to see the weather for
-- Searched Cities will be saved and updated based on the last city searched.  
-* [Weather Dashboard](https://canadianfaller7.github.io/weather-dashboard/ "Named link title")
+- Input your address and click 'Go'
+- Geo api, will get your lat and long from the address you entered and will return a list of breweries near you
+* [Beer Finder](https://canadianfaller7.github.io/beer-finder/ "Named link title")
 
 ## Credits
 - Daniel Graves,
