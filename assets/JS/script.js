@@ -4,6 +4,7 @@
 const geoCodeAPIKey = "887595172218881676268x71325";
 
 var errorModal = $("#errorModal");
+let missionModal = $('.mission')
 
 /* this function is getting the users address and then passing it into
 the geo api call*/
@@ -146,25 +147,37 @@ const getSearchHistory = () => {
     if (localStorage.getItem('history') != null) {
     const historyLat = history[0];
     const historyLong = history[1];
-    const historyBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${historyLat},${historyLong}&per_page=4`;
-   fetch(historyBreweryUrl)
+    // const historyBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${historyLat},${historyLong}&per_page=4`;
+    const historyAddress = `https://geocode.xyz/${historyLat},${historyLong}?geoit=json=1&auth=${geoCodeAPIKey}`;
+  //  fetch(historyBreweryUrl)
+  fetch(historyAddress)
   .then(response => {
     if (!response.ok) throw new Error(response.statusText);
     return response.json();
   })
   .then(data => {
     console.log(data);
-    let historyPubOne = data[0];
-    let historyPubTwo = data[1];
-    let historyPubThree = data[2];
-    let historyPubFour = data[3];
-    console.log(historyPubOne);
-    $("#search-history1").text(historyPubOne.name);
-    $( "#search-history2").text(historyPubTwo.name);
-    $("#search-history3").text(historyPubThree.name);
-    $("#search-history4").text(historyPubFour.name);   
+    // let historyPubOne = data[0];
+    // let historyPubTwo = data[1];
+    // let historyPubThree = data[2];
+    // let historyPubFour = data[3];
+    // console.log(historyPubOne);
+    // $("#search-history1").text(historyPubOne.name);
+    // $( "#search-history2").text(historyPubTwo.name);
+    // $("#search-history3").text(historyPubThree.name);
+    // $("#search-history4").text(historyPubFour.name);
+    let historyAddressOne = data[0];
+    // let historyAddressTwo = data[1];
+    // let historyAddressThree = data[2];
+    // let historyAddressFour = data[3];
+
+    console.log(historyAddressOne);
+    $("#search-history1").text(`${historyAddressOne.stnumber} ${historyAddressOne.addrest}`);
+    // $( "#search-history2").text(historyAddressTwo.stnumber);
+    // $("#search-history3").text(historyAddressThree.stnumber);
+    // $("#search-history4").text(historyAddressFour.stnumber);  
     
-})
+  })
     }
     
     //return history;
@@ -176,6 +189,16 @@ const getSearchHistory = () => {
     findBrewery(val);
 });*/
 
+$('.mission').on('click', (e) => {
+  $('#missionModal').show();
+  $(".close").on("click", (e) => {
+    $('#missionModal').hide();
+  });
+});
+
+
+
+
 // event listener on .submit-button
 $("#address-submit").on("click", (e) => {
   getLatAndLong()
@@ -186,6 +209,4 @@ $("#address-submit").on("click", (e) => {
   $("#user-city").val('');
   $('#states').val('AL');
   $('.location-info').html('');
-
-  
 });

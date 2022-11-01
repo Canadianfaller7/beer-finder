@@ -110,6 +110,13 @@ main .brewery-list .location-info {
     display: block;
 }
 
+.mission p{
+    padding: 20px;
+    text-align: right;
+    text-decoration: underline;
+    color: white;
+}
+
 /* Modal Content */
 
 .modal {
@@ -127,7 +134,18 @@ main .brewery-list .location-info {
   }
 
 .modal-content {
-    background-color: rgb(252, 45, 45);
+    background-color: #990000;
+    color: white;
+    margin: auto;
+    padding: 20px;
+    border: none;
+    border-radius: 8px;
+    width: 80%;
+}
+
+.modal-content-mission {
+    background-color: #000;
+    color: white;
     margin: auto;
     padding: 20px;
     border: none;
