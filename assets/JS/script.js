@@ -1,9 +1,9 @@
 // API Keys
 // No API Key required for OpenBrewery
-
 const geoCodeAPIKey = "887595172218881676268x71325";
 
-var errorModal = $("#errorModal");
+let errorModal = $("#errorModal");
+let missionModal = $('.mission')
 
 /* this function is getting the users address and then passing it into
 the geo api call*/
@@ -30,7 +30,7 @@ const getLatAndLong = async () => {
       });
       
       // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
+      window.onclick = event => {
         if (event.target == errorModal) {
           errorModal.hide();
         }
@@ -58,7 +58,6 @@ const findBrewery = async (lat,lon) => {
     return response.json();
   })
   .then(data => {
-    console.log(data);
     // setting var for 6 pub locations
     let pubOne = data[0];
     let pubTwo = data[1];
@@ -137,47 +136,45 @@ const savedLatLon = (lat, lon) => {
 
 }
 
-
 // getting the history or array from local storage and returning it
-const getSearchHistory = () => {
+const getSearchHistory = async () => {
     const history = JSON.parse(localStorage.getItem('history')) || [];
-    console.log(history);
+
     //running the localStorage latn and long to receive associated pubs in order to populate page with search history.
     if (localStorage.getItem('history') != null) {
-    const historyLat = history[0];
-    const historyLong = history[1];
-    const historyBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${historyLat},${historyLong}&per_page=4`;
-   fetch(historyBreweryUrl)
-  .then(response => {
-    if (!response.ok) throw new Error(response.statusText);
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-    let historyPubOne = data[0];
-    let historyPubTwo = data[1];
-    let historyPubThree = data[2];
-    let historyPubFour = data[3];
-    console.log(historyPubOne);
-    $("#search-history1").text(historyPubOne.name);
-    $( "#search-history2").text(historyPubTwo.name);
-    $("#search-history3").text(historyPubThree.name);
-    $("#search-history4").text(historyPubFour.name);   
-    
-})
-    }
-    
-    //return history;
+      const historyLat = history[0];
+      const historyLong = history[1];
+      const historyBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${historyLat},${historyLong}&per_page=4`;
 
+      await fetch(historyBreweryUrl)
+      .then(response => {
+        if (!response.ok) throw new Error(response.statusText);
+        return response.json();
+      })
+      .then(data => {
+        let historyPubOne = data[0];
+        let historyPubTwo = data[1];
+        let historyPubThree = data[2];
+        let historyPubFour = data[3];
+
+        $("#search-history1").text(historyPubOne.name);
+        $( "#search-history2").text(historyPubTwo.name);
+        $("#search-history3").text(historyPubThree.name);
+        $("#search-history4").text(historyPubFour.name); 
+      })
+    }
 }
- /*$('#history-dropdown').change(function() {
-    var val = $("#history-dropdown option:selected").text();
-    if ()
-    findBrewery(val);
-});*/
+
+// hide and show mission statement
+$('.mission').on('click', e => {
+  $('#missionModal').show();
+  $(".close").on("click", e => {
+    $('#missionModal').hide();
+  });
+});
 
 // event listener on .submit-button
-$("#address-submit").on("click", (e) => {
+$("#address-submit").on("click", e => {
   getLatAndLong()
   // resetting user values for new input
   $("#user-house").val('');
@@ -186,6 +183,4 @@ $("#address-submit").on("click", (e) => {
   $("#user-city").val('');
   $('#states').val('AL');
   $('.location-info').html('');
-
-  
 });
