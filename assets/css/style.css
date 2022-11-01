@@ -98,6 +98,34 @@ main .brewery-list .location-info {
     display: none;
 }
 
+/* Modal  */
+.modal-container {
+    margin-left: 88%;
+    margin-top: 1%;
+    color: white;
+} 
+
+.modal-container button {
+    font-size: 20px;
+}
+
+.modal-content {
+    margin-left: 88%;
+    margin-top: 3.5%;
+}
+
+.modal-container button {
+    background-color: #000;
+    color: white;
+}
+
+.modal-footer button {
+    margin-top: 1px;
+    font-size: 25px;
+    
+}
+
+
 @media(min-width:768px) {
 
     html {
