@@ -15,7 +15,7 @@ N/A
 * [Beer Finder](https://canadianfaller7.github.io/beer-finder/ "Named link title")
 
 ## Credits
-- Daniel Graves @danielcgrave,
+- Daniel Graves @danielcgraves,
 - Jennifer Fletcher @JennyFletch,
 - Heidrun Kubiessa @Kubikubiessa,
 - Skyler Hafen @Sky-haf,
