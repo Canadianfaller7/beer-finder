@@ -4,6 +4,7 @@
 - This is a web application that allows the user search to put in their current location and will find the 6 nearest breweries!
 
 - As we went through this project the biggest impact was learning how to work as a group, using Git and how to set up a project. We were tasked to work with multiple restAPI's and know to use their information to integrate with eachother in order to get results for the nearest breweries, and to save the returned information into local storage. The layout was built using the Bulma css framework with our project, a CSS framework other than bootstrap.
+- * [Beer Finder](https://canadianfaller7.github.io/beer-finder/ "Named link title")
 
 ## Installation
 N/A
