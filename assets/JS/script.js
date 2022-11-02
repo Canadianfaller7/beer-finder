@@ -78,7 +78,7 @@ const findBrewery = async (lat,lon) => {
     const pubOneInfo = 
                       `
                       <p>${pubOne.street}, ${pubOne.city}, ${pubOne.postal_code}</p>
-                      <p>${pubOne.website_url}</p>
+                      <a href='${pubOne.website_url}' target='_blank'>${pubOne.website_url}</a>
                   
                       `;
     $('#location-info-1').append(pubOneInfo);
@@ -86,35 +86,35 @@ const findBrewery = async (lat,lon) => {
     const pubTwoInfo = 
                       `
                       <p>${pubTwo.street}, ${pubTwo.city}, ${pubTwo.postal_code}</p>
-                      <p>${pubTwo.website_url}</p>
+                      <a href='${pubTwo.website_url}' target='_blank'>${pubTwo.website_url}</a>
                       `;
     $('#location-info-2').append(pubTwoInfo);
   
     const pubThreeInfo = 
                       `
                       <p>${pubThree.street}, ${pubThree.city}, ${pubThree.postal_code}</p>
-                      <p>${pubThree.website_url}</p>
+                      <a href='${pubThree.website_url}' target='_blank'>${pubThree.website_url}</a>
                       `;
     $('#location-info-3').append(pubThreeInfo);
 
     const pubFourInfo = 
                       `
                       <p>${pubFour.street}, ${pubFour.city}, ${pubFour.postal_code}</p>
-                      <p>${pubFour.website_url}</p>
+                      <a href='${pubFour.website_url}' target='_blank'>${pubFour.website_url}</a>
                       `;
     $('#location-info-4').append(pubFourInfo);
 
     const pubFiveInfo = 
                       `
                       <p>${pubFive.street}, ${pubFive.city}, ${pubFive.postal_code}</p>
-                      <p>${pubFive.website_url}</p>
+                      <a href='${pubFive.website_url}' target='_blank'>${pubFive.website_url}</a>
                       `;
     $('#location-info-5').append(pubFiveInfo);
 
     const pubSixInfo = 
                       `
                       <p>${pubSix.street}, ${pubSix.city}, ${pubSix.postal_code}</p>
-                      <p>${pubSix.website_url}</p>
+                      <a href='${pubSix.website_url}' target='_blank'>${pubSix.website_url}</a>
                       `;
     $('#location-info-6').append(pubSixInfo);
   }) 
