@@ -137,10 +137,14 @@ const savedLatLon = (lat, lon) => {
 }
 
 // getting the history or array from local storage and returning it
-const getSearchHistory = async () => {
+const getSearchHistory = () => {
     const history = JSON.parse(localStorage.getItem('history')) || [];
+    returnHistory(history)
+    return history
+}
 
-    //running the localStorage latn and long to receive associated pubs in order to populate page with search history.
+const returnHistory = async history => {
+  //running the localStorage latn and long to receive associated pubs in order to populate page with search history.
     if (localStorage.getItem('history') != null) {
       const historyLat = history[0];
       const historyLong = history[1];
