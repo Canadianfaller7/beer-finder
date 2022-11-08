@@ -7,7 +7,7 @@ let missionModal = $('.mission')
 
 /* this function is getting the users address and then passing it into
 the geo api call*/
-const getLatAndLong = async () => {
+const getLatAndLong = () => {
   let inputStreet = $("#user-street").val();
   let inputZip = $("#user-zip-code").val();
   let inputCity = $("#user-city").val();
@@ -15,7 +15,7 @@ const getLatAndLong = async () => {
   const geoQueryUrl = `https://geocode.xyz/${inputStreet},+${inputZip}+${inputCity}?json=1&auth=${geoCodeAPIKey}`;
 
   // wait for result and make sure response is good, parse it
-  await fetch(geoQueryUrl)
+  fetch(geoQueryUrl)
   .then(response => response.json())
   .then(data => {
     $('.accordion').addClass('hide')
@@ -49,10 +49,10 @@ const getLatAndLong = async () => {
 
 /* This function takes the lat and lon from the geop api and passes it into the openBrewery api to get the 
 closest pubs near the location user entered */
-const findBrewery = async (lat,lon) => {
+const findBrewery = (lat,lon) => {
   const openBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${lat},${lon}&per_page=6`;
 
-  await fetch(openBreweryUrl)
+  fetch(openBreweryUrl)
   .then(response => {
     if (!response.ok) throw new Error(response.statusText);
     return response.json();
@@ -78,7 +78,7 @@ const findBrewery = async (lat,lon) => {
     const pubOneInfo = 
                       `
                       <p>${pubOne.street}, ${pubOne.city}, ${pubOne.postal_code}</p>
-                      <p>${pubOne.website_url}</p>
+                      <a href='${pubOne.website_url}' target='_blank'>${pubOne.website_url}</a>
                   
                       `;
     $('#location-info-1').append(pubOneInfo);
@@ -86,35 +86,35 @@ const findBrewery = async (lat,lon) => {
     const pubTwoInfo = 
                       `
                       <p>${pubTwo.street}, ${pubTwo.city}, ${pubTwo.postal_code}</p>
-                      <p>${pubTwo.website_url}</p>
+                      <a href='${pubTwo.website_url}' target='_blank'>${pubTwo.website_url}</a>
                       `;
     $('#location-info-2').append(pubTwoInfo);
   
     const pubThreeInfo = 
                       `
                       <p>${pubThree.street}, ${pubThree.city}, ${pubThree.postal_code}</p>
-                      <p>${pubThree.website_url}</p>
+                      <a href='${pubThree.website_url}' target='_blank'>${pubThree.website_url}</a>
                       `;
     $('#location-info-3').append(pubThreeInfo);
 
     const pubFourInfo = 
                       `
                       <p>${pubFour.street}, ${pubFour.city}, ${pubFour.postal_code}</p>
-                      <p>${pubFour.website_url}</p>
+                      <a href='${pubFour.website_url}' target='_blank'>${pubFour.website_url}</a>
                       `;
     $('#location-info-4').append(pubFourInfo);
 
     const pubFiveInfo = 
                       `
                       <p>${pubFive.street}, ${pubFive.city}, ${pubFive.postal_code}</p>
-                      <p>${pubFive.website_url}</p>
+                      <a href='${pubFive.website_url}' target='_blank'>${pubFive.website_url}</a>
                       `;
     $('#location-info-5').append(pubFiveInfo);
 
     const pubSixInfo = 
                       `
                       <p>${pubSix.street}, ${pubSix.city}, ${pubSix.postal_code}</p>
-                      <p>${pubSix.website_url}</p>
+                      <a href='${pubSix.website_url}' target='_blank'>${pubSix.website_url}</a>
                       `;
     $('#location-info-6').append(pubSixInfo);
   }) 
@@ -143,14 +143,14 @@ const getSearchHistory = () => {
     return history
 }
 
-const returnHistory = async history => {
+const returnHistory = history => {
   //running the localStorage latn and long to receive associated pubs in order to populate page with search history.
     if (localStorage.getItem('history') != null) {
       const historyLat = history[0];
       const historyLong = history[1];
       const historyBreweryUrl = `https://api.openbrewerydb.org/breweries?by_dist=${historyLat},${historyLong}&per_page=4`;
 
-      await fetch(historyBreweryUrl)
+      fetch(historyBreweryUrl)
       .then(response => {
         if (!response.ok) throw new Error(response.statusText);
         return response.json();
