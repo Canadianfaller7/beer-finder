@@ -115,6 +115,7 @@ main .brewery-list .location-info {
     text-align: right;
     text-decoration: underline;
     color: white;
+    cursor: pointer;
 }
 
 /* Modal Content */
