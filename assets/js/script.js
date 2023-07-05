@@ -23,8 +23,8 @@ const getLatAndLong = () => {
   .then(data => {
     $('.accordion').addClass('hide')
     // getting lat and lon from api data to pass into brewery api
-    let lat = data.latt ;
-    let lon = data.longt;
+    let lat = data.results[0].position.lat;
+    let lon = data.results[0].position.lon;
     
     if (lat === "0.00000", lon === "0.00000") {
       errorModal.show();
