@@ -1,6 +1,6 @@
 // API Keys
 // No API Key required for OpenBrewery
-const geoCodeAPIKey = "887595172218881676268x71325";
+const geoCodeAPIKey = "q7Ke99SInnm78MdEDZZSyUIVLvpQA2Eg";
 
 let errorModal = $("#errorModal");
 let missionModal = $('.mission')
@@ -8,12 +8,15 @@ let missionModal = $('.mission')
 /* this function is getting the users address and then passing it into
 the geo api call*/
 const getLatAndLong = () => {
+  let inputHouse = $("#user-house").val();
   let inputStreet = $("#user-street").val();
   let inputZip = $("#user-zip-code").val();
   let inputCity = $("#user-city").val();
 
-  const geoQueryUrl = `https://geocode.xyz/${inputStreet},+${inputZip}+${inputCity}?json=1&auth=${geoCodeAPIKey}`;
+  let userAddress = `${inputHouse} ${inputStreet}, ${inputCity} `
 
+  const geoQueryUrl = `https://api.tomtom.com/search/2/geocode/${userAddress}.json?key=${geoCodeAPIKey}`;
+  
   // wait for result and make sure response is good, parse it
   fetch(geoQueryUrl)
   .then(response => response.json())
