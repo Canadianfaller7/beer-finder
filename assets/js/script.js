@@ -21,8 +21,6 @@ const getLatAndLong = () => {
     // getting lat and lon from api data to pass into brewery api
     let lat = data.results[0].position.lat;
     let lon = data.results[0].position.lon;
-    let lat = data.results[0].position.lat;
-    let lon = data.results[0].position.lon;
     
     if (lat === "0.00000", lon === "0.00000") {
       errorModal.show();
@@ -151,12 +149,13 @@ $('.mission').on('click', e => {
 
 // event listener on .submit-button
 $("#address-submit").on("click", e => {
+  
   getLatAndLong()
   // resetting user values for new input
+  $(".brewpubs").html("");
   $("#user-house").val('');
   $("#user-street").val('');
   $("#user-zip-code").val('');
   $("#user-city").val('');
   $('#states').val('AL');
-  $('.location-info').html('');
 });
