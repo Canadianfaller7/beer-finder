@@ -1,3 +1,5 @@
+// API Keys
+// No API Key required for OpenBrewery
 const geoCodeAPIKey = "q7Ke99SInnm78MdEDZZSyUIVLvpQA2Eg";
 
 let errorModal = $("#errorModal");
@@ -17,6 +19,8 @@ const getLatAndLong = () => {
   .then(data => {
     $('.accordion').addClass('hide')
     // getting lat and lon from api data to pass into brewery api
+    let lat = data.results[0].position.lat;
+    let lon = data.results[0].position.lon;
     let lat = data.results[0].position.lat;
     let lon = data.results[0].position.lon;
     
