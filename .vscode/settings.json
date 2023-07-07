@@ -1,10 +1,4 @@
 {
-    "liveServer.settings.port": 5501,
-    "cSpell.words": [
-        "Cityname",
-        "geop",
-        "latt",
-        "longt",
-        "stnumber"
-    ]
+  "liveServer.settings.port": 5502,
+  "cSpell.words": ["Cityname", "geop", "latt", "longt", "stnumber"]
 }
